@@ -27,5 +27,7 @@ how to use
     propagationTransition.startAnimation();
 ```
 
+ScreenShots
+--------
 ![Sample gif](smoother.gif)<br>
 ![Sample gif](smooter_1.gif)
