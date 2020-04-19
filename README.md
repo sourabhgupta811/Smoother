@@ -1,6 +1,6 @@
 # Smoother
 Animator Utlity class for smoother and quick ViewGroup animations like entry and exit transitions.<br>
-<a href="https://medium.com/@sourabhgupta_49508/make-android-animations-choreography-fun-again-8163d5843a72?source=friends_link&sk=9165a9d280e8d3348ba528f11ea065dd">Link to Medium Story</a>
+<a href="https://medium.com/@sourabhgupta_49508/make-android-animations-choreography-fun-again-8163d5843a72?source=friends_link&sk=9165a9d280e8d3348ba528f11ea065dd">Smoother Medium Story</a>
 
 Download
 --------
