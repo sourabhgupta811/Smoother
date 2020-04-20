@@ -19,6 +19,7 @@ package com.samnetworks.smoother;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.animation.ObjectAnimator;
+import android.animation.PropertyValuesHolder;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
@@ -60,38 +61,56 @@ public class TranslateAnimation extends Visibility {
             return null;
         }
         ObjectAnimator anim = null;
-        if (direction == Direction.BOTTTOM) {
-            view.setTranslationY(DimensionUtils.dpToPx(translationDistance));
-            anim = ObjectAnimator.ofFloat(view, "translationY",
-                    0);
-            if (true) {
-                Log.d("debug_translate", "Created animator ");
-            }
+        if(view.getTag()!=null && view.getTag().equals("scale")){
+            view.setScaleX(0f);
+            view.setScaleY(0f);
+            anim = ObjectAnimator.ofPropertyValuesHolder(view,
+                    PropertyValuesHolder.ofFloat("scaleX", 1f),
+                    PropertyValuesHolder.ofFloat("scaleY", 1f));
             FadeAnimatorListener listener = new FadeAnimatorListener(view);
             anim.addListener(listener);
             addListener(new TransitionListenerAdapter() {
                 @Override
                 public void onTransitionEnd(@NonNull Transition transition) {
-                    view.setTranslationY(0);
+                    view.setScaleX(1f);
+                    view.setScaleY(1f);
                     transition.removeListener(this);
                 }
             });
-        } else if (direction == Direction.RIGHT) {
-            view.setTranslationX(DimensionUtils.dpToPx(translationDistance));
-            anim = ObjectAnimator.ofFloat(view, "translationX",
-                    0);
-            if (true) {
-                Log.d("debug_translate", "Created animator ");
+        } else {
+            if (direction == Direction.BOTTTOM) {
+                view.setTranslationY(DimensionUtils.dpToPx(translationDistance));
+                anim = ObjectAnimator.ofFloat(view, "translationY",
+                        0);
+                if (true) {
+                    Log.d("debug_translate", "Created animator ");
+                }
+                FadeAnimatorListener listener = new FadeAnimatorListener(view);
+                anim.addListener(listener);
+                addListener(new TransitionListenerAdapter() {
+                    @Override
+                    public void onTransitionEnd(@NonNull Transition transition) {
+                        view.setTranslationY(0);
+                        transition.removeListener(this);
+                    }
+                });
+            } else if (direction == Direction.RIGHT) {
+                view.setTranslationX(DimensionUtils.dpToPx(translationDistance));
+                anim = ObjectAnimator.ofFloat(view, "translationX",
+                        0);
+                if (true) {
+                    Log.d("debug_translate", "Created animator ");
+                }
+                FadeAnimatorListener listener = new FadeAnimatorListener(view);
+                anim.addListener(listener);
+                addListener(new TransitionListenerAdapter() {
+                    @Override
+                    public void onTransitionEnd(@NonNull Transition transition) {
+                        view.setTranslationX(0);
+                        transition.removeListener(this);
+                    }
+                });
             }
-            FadeAnimatorListener listener = new FadeAnimatorListener(view);
-            anim.addListener(listener);
-            addListener(new TransitionListenerAdapter() {
-                @Override
-                public void onTransitionEnd(@NonNull Transition transition) {
-                    view.setTranslationX(0);
-                    transition.removeListener(this);
-                }
-            });
         }
         return anim;
     }

@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.ViewTreeObserver;
 import android.view.animation.Interpolator;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -23,6 +24,7 @@ public class DemoActivity extends AppCompatActivity {
     LinearLayout frame_layout;
     RecyclerView recyclerview;
     TextView demo_text;
+    ImageView imageView;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -31,6 +33,7 @@ public class DemoActivity extends AppCompatActivity {
         frame_layout = findViewById(R.id.frame_layout);
         recyclerview = findViewById(R.id.recyclerview);
         demo_text = findViewById(R.id.demo_text);
+        imageView = findViewById(R.id.image_view);
         recyclerview.setLayoutManager(new LinearLayoutManager(this, RecyclerView.HORIZONTAL, false));
         recyclerview.setAdapter(new RecyclerViewAdapter());
         frame_layout.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
@@ -54,6 +57,7 @@ public class DemoActivity extends AppCompatActivity {
     }
 
     public void replay(View view) {
+        imageView.setTag("scale");
         SmoothAnimator propagationTransition = new SmoothAnimator(frame_layout,
                 demo_text,
                 new TransitionSet()
